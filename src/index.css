@@ -1,0 +1,360 @@
+/* ===== GLOBAL RESET ===== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+/* theme variables + animated background */
+:root {
+  --bg1: #ff9a9e;
+  --bg2: #fad0c4;
+  --bg3: #a18cd1;
+  --bg4: #fbc2eb;
+
+  --accent1: #6a11cb;
+  --accent2: #2575fc;
+  --accent3: #ff6a00;
+  --accent4: #ee0979;
+
+  --accent2-rgb: 37, 117, 252;
+}
+
+/* ===== BODY ===== */
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(-45deg, var(--bg1), var(--bg2), var(--bg3), var(--bg4));
+  background-size: 400% 400%;
+  animation: gradientShift 18s ease infinite;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 30px 10px;
+  color: #333;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.14) 1px, transparent 1px);
+  background-size: 22px 22px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ===== MAIN CONTAINER ===== */
+.container {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.88)) padding-box,
+              linear-gradient(135deg, var(--accent1), var(--accent2)) border-box;
+  width: 420px;
+  padding: 22px;
+  border-radius: 14px;
+  border: 2px solid transparent;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25);
+  backdrop-filter: saturate(120%) blur(10px);
+  z-index: 1;
+}
+
+/* ===== HEADER ===== */
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+  background: linear-gradient(90deg, var(--accent1), var(--accent2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+@supports (-webkit-background-clip: text) {
+  h2 {
+    background: linear-gradient(90deg, var(--accent1), var(--accent2));
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+}
+background-clip: text;
+  color: transparent;
+}
+
+h4 {
+  font-size: 14px;
+  color: #666;
+}
+
+h1 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #2c3e50;
+}
+
+/* ===== INCOME & EXPENSE BOX ===== */
+.inc-exp-container {
+  display: flex;
+  justify-content: space-between;
+  background: linear-gradient(135deg, #f7f9fc, #eef2ff);
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+}
+
+.inc-exp-container div {
+  flex: 1;
+  text-align: center;
+}
+
+.inc-exp-container div:first-child {
+  border-right: 1px solid #ddd;
+}
+
+.money {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.money.plus {
+  color: #27ae60;
+}
+
+.money.minus {
+  color: #e74c3c;
+}
+
+/* ===== SEARCH & FILTER INPUTS ===== */
+input[type="text"],
+input[type="number"],
+input[type="date"],
+input[type="month"],
+select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  border: 1px solid #cfd8dc;
+  font-size: 14px;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: var(--accent2);
+  box-shadow: 0 0 0 3px rgba(var(--accent2-rgb), 0.22);
+}
+
+/* ===== HISTORY SECTION ===== */
+h3 {
+  margin: 15px 0 10px;
+  font-size: 16px;
+  color: #2c3e50;
+}
+
+.section-title {
+  color: #1e3c72;
+  margin: 8px 0;
+  font-weight: 600;
+}
+
+.list {
+  list-style: none;
+  margin-bottom: 20px;
+}
+
+/* ===== TRANSACTION ITEM ===== */
+.list li {
+  background: linear-gradient(180deg, #ffffff, #f4f8ff);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  border-right: 6px solid;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.list li.plus {
+  border-color: #2ecc71;
+}
+
+.list li.minus {
+  border-color: #e74c3c;
+}
+
+.list li:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+}
+
+.list li span {
+  font-weight: bold;
+  margin-left: auto;
+  margin-right: 8px;
+}
+
+/* ===== EDIT & DELETE BUTTONS ===== */
+.list li button {
+  border: none;
+  cursor: pointer;
+  margin-left: 5px;
+  padding: 6px 10px;
+  font-size: 13px;
+  border-radius: 6px;
+  transition: transform 0.12s ease, opacity 0.12s ease, box-shadow 0.12s ease;
+}
+
+.list li button:first-of-type {
+  background: linear-gradient(135deg, #fbc02d, #ffb300);
+  color: #333;
+  box-shadow: 0 4px 10px rgba(251, 192, 45, 0.35);
+}
+
+.list li button:last-of-type {
+  background: linear-gradient(135deg, #ff4b2b, #e74c3c);
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(231, 76, 60, 0.35);
+}
+
+.list li button:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+/* ===== ADD TRANSACTION FORM ===== */
+form {
+  margin-top: 10px;
+}
+
+form button {
+  width: 100%;
+  background: linear-gradient(135deg, var(--accent1), var(--accent2));
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 12px;
+  font-size: 15px;
+  cursor: pointer;
+  box-shadow: 0 8px 18px rgba(var(--accent2-rgb), 0.25);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+}
+.data-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.data-actions button {
+  width: 100%;
+  background: linear-gradient(135deg, var(--accent1), var(--accent2));
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 6px 14px rgba(var(--accent2-rgb), 0.25);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+}
+
+.data-actions button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 20px rgba(var(--accent2-rgb), 0.3);
+}
+
+.data-actions button:active {
+  transform: translateY(0);
+  opacity: 0.95;
+}
+
+form button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(var(--accent2-rgb), 0.3);
+}
+
+form button:active {
+  transform: translateY(0);
+  opacity: 0.95;
+}
+
+form button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  box-shadow: none;
+  filter: grayscale(10%);
+}
+
+.data-actions button:active {
+  transform: translateY(0);
+  opacity: 0.95;
+}
+
+/* ===== ANALYTICS SECTION ===== */
+canvas {
+  margin: 15px auto;
+  max-width: 100%;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+  padding: 8px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 480px) {
+  .container {
+    width: 100%;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+}
+/* ===== DARK MODE ===== */
+body.dark {
+  background: linear-gradient(135deg, #0f2027, #2c5364);
+  color: #eaeaea;
+}
+body.dark .container {
+  background: linear-gradient(180deg, rgba(20, 20, 20, 0.92), rgba(30, 30, 30, 0.88));
+  border: 2px solid transparent;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.55);
+}
+body.dark h2 {
+  color: #eaeaea; /* fallback for dark mode */
+  background: linear-gradient(90deg, #66a6ff, #89f7fe);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+body.dark .inc-exp-container {
+  background: linear-gradient(135deg, #1b2735, #283e51);
+}
+body.dark .list li {
+  background: linear-gradient(180deg, #1f1f1f, #262626);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
+}
+body.dark input,
+body.dark select {
+  background: #1f1f1f;
+  color: #eaeaea;
+  border-color: #3a3a3a;
+}
+body.dark form button {
+  background: linear-gradient(135deg, #66a6ff, #89f7fe);
+  color: #102a43;
+}
+body.dark .section-title {
+  color: #89f7fe;
+}
+body.dark .data-actions button {
+  background: linear-gradient(135deg, #66a6ff, #89f7fe);
+  color: #102a43;
+}
